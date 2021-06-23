@@ -21,22 +21,24 @@ do
     cp $CDIR/$f $build_dir/
 done
 
-#url='https://github.com/xxh/zsh-portable/raw/master/result/zsh-portable-Linux-x86_64.tar.gz'
-#tarname=`basename $url`
+url='https://dl.elv.sh/linux-amd64/elvish-v0.15.0.tar.gz'
+tarname=`basename $url`
 #
-#cd $build_dir
+cd $build_dir
 #
-#[ $QUIET ] && arg_q='-q' || arg_q=''
-#[ $QUIET ] && arg_s='-s' || arg_s=''
-#[ $QUIET ] && arg_progress='' || arg_progress='--show-progress'
+[ $QUIET ] && arg_q='-q' || arg_q=''
+[ $QUIET ] && arg_s='-s' || arg_s=''
+[ $QUIET ] && arg_progress='' || arg_progress='--show-progress'
 #
-#if [ -x "$(command -v wget)" ]; then
-#  wget $arg_q $arg_progress $url -O $tarname
-#elif [ -x "$(command -v curl)" ]; then
-#  curl $arg_s -L $url -o $tarname
-#else
-#  echo Install wget or curl
-#fi
+if [ -x "$(command -v wget)" ]; then
+  wget $arg_q $arg_progress $url -O $tarname
+elif [ -x "$(command -v curl)" ]; then
+  curl $arg_s -L $url -o $tarname
+else
+  echo Install wget or curl
+fi
 #
-#tar -xzf $tarname
-#rm $tarname
+tar -xf $tarname
+rm $tarname
+mkdir bin
+bash -c 'mv elvish-v* bin/elvish'
